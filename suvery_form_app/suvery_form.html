@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Survey Form</title>
+  <style>
+    /* Add CSS styling here */
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    select, input[type="text"], input[type="email"], input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    input[type="checkbox"] {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body bgcolor="cyan">
+  <div class="container">
+    <h1>Survey Form</h1>
+    <form id="surveyForm">
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" required>
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" required>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" required>
+
+      <label for="country">Country:</label>
+      <select id="country" required>
+        <option value="">Select Country</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <!-- Add more countries here -->
+      </select>
+
+      <label>Gender:</label>
+      <label for="male">Male</label>
+      <input type="checkbox" id="male" name="gender" value="Male">
+      <label for="female">Female</label>
+      <input type="checkbox" id="female" name="gender" value="Female">
+
+      <label for="profession">Profession:</label>
+      <input type="text" id="profession" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="mobile">Mobile Number:</label>
+      <input type="tel" id="mobile" required>
+
+      <button type="submit">Submit</button>
+      <button type="button" onclick="resetForm()">Reset</button>
+    </form>
+  </div>
+
+  <script>
+    function resetForm() {
+      document.getElementById('surveyForm').reset();
+    }
+
+    document.getElementById('surveyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Validate the form here
+
+      // Display a popup with selected values
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const dob = document.getElementById('dob').value;
+      const country = document.getElementById('country').value;
+      const gender = Array.from(document.querySelectorAll('input[name="gender"]:checked')).map(checkbox => checkbox.value);
+      const profession = document.getElementById('profession').value;
+      const email = document.getElementById('email').value;
+      const mobile = document.getElementById('mobile').value;
+
+      const popupText = `
+        First Name: ${firstName}
+        Last Name: ${lastName}
+        Date of Birth: ${dob}
+        Country: ${country}
+        Gender: ${gender.join(', ')}
+        Profession: ${profession}
+        Email: ${email}
+        Mobile Number: ${mobile}
+      `;
+
+      alert(popupText);
+
+      // Reset the form
+      resetForm();
+    });
+  </script>
+</body>
+</html>
